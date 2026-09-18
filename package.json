@@ -1,0 +1,21 @@
+{
+  "name": "bun-forward-proxy",
+  "version": "0.1.0",
+  "description": "HTTP/CONNECT forward proxy for headless Chromium, written with Bun.listen, deployable to Fly.io",
+  "module": "src/index.ts",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alexzvn <personal@alexzvn.me>",
+  "keywords": ["bun", "proxy", "connect", "chromium", "puppeteer", "fly.io"],
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
