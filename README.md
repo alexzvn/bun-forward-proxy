@@ -1,24 +1,12 @@
-# bun-forward-proxy
+# Bun Forward Proxy
 
-HTTP forward proxy with `CONNECT` tunneling, built on `Bun.listen` / `Bun.connect`. No `node:*` imports, no dependencies. Made for pointing headless Chromium (`--proxy-server=`) at a remote egress IP, e.g. a Fly.io machine.
-
-## Why not `Bun.serve`
-
-`Bun.serve` cannot host a `CONNECT` proxy (verified on Bun 1.4.0):
-
-| attempt | result |
-| --- | --- |
-| `server.upgrade(req)` inside `fetch` | returns `false` — WebSocket handshake headers required, no raw-socket handoff |
-| `new Response(stream)` + read `req.body` | `req.body` is `undefined` for `CONNECT`, so client bytes are unreachable |
-| answering `CONNECT` with 200 | handshake completes, then the socket is closed ([oven-sh/bun#37585](https://github.com/oven-sh/bun/pull/37585)) |
-
-`Bun.listen` is the Bun-native primitive that exposes raw duplex sockets, so the proxy is built there.
+HTTP forward proxy with `CONNECT` tunneling, built on `Bun.listen` / `Bun.connect`. Made for pointing headless Chromium (`--proxy-server=`) at a remote egress IP, e.g. a Fly.io machine.
 
 ## Run
 
 ```sh
 bun install
-bun start          # PORT=8080 by default
+bun start    # PORT=8080 by default
 bun run test
 ```
 
